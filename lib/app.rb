@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'player'
+require './lib/player'
 
 class Battle < Sinatra::Base
 
@@ -32,6 +32,16 @@ class Battle < Sinatra::Base
   get '/attack' do
     @player_1_name = $player_1.name
     @player_2_name = $player_2.name
+
+    erb :attack
+  end
+
+  post '/attack' do
+    $player_2.receive_attack
+    @player_1_name = $player_1.name
+    @player_2_name = $player_2.name
+    @player_2_hit_points = $player_2.hit_points
+
     erb :attack
   end
 
