@@ -1,5 +1,7 @@
 require 'sinatra/base'
 require './lib/player'
+require './lib/game.rb'
+
 
 class Battle < Sinatra::Base
 
@@ -37,7 +39,7 @@ class Battle < Sinatra::Base
   end
 
   post '/attack' do
-    $player_2.receive_attack
+    Game.new.attack($player_2)
     @player_1_name = $player_1.name
     @player_2_name = $player_2.name
     @player_2_hit_points = $player_2.hit_points
